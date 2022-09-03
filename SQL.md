@@ -1002,6 +1002,8 @@ INNER JOIN item it ON red.itemid = it.itemid
 ORDER BY bill DESC
 LIMIT 0,1; 
 -- 이거는 원하는 의도가 아직 잘 안됌
+-- ERD에서 따로 생각
+-- 우리가 했던 예제를 참고해보자 sqldb usertbl, buytbl
 
 -- 3. 판매자'노주희'가 파는 물건 중 가장 비싼 물건
 SELECT * FROM seller se

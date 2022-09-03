@@ -389,11 +389,11 @@ INSERT INTO refund VALUES ( 4, 'd', '주문실수');
 SELECT * FROM refund;
 -- 완
 
-INSERT INTO requestdetail VALUES ('a',NULL,100,NULL,0,5);
-INSERT INTO requestdetail VALUES ('b',NULL,150,NULL,0,10);
-INSERT INTO requestdetail VALUES ('c',NULL,140,NULL,0,9);
-INSERT INTO requestdetail VALUES ('d',NULL,120,NULL,0,4);
-INSERT INTO requestdetail VALUES ('e',NULL,115,NULL,0,2);
+INSERT INTO requestdetail VALUES ('a',1,101,NULL,0,5);
+INSERT INTO requestdetail VALUES ('b',2,150,NULL,0,10);
+INSERT INTO requestdetail VALUES ('c',3,140,NULL,0,9);
+INSERT INTO requestdetail VALUES ('d',4,120,NULL,0,4);
+INSERT INTO requestdetail VALUES ('e',5,115,NULL,0,2);
 SELECT * FROM requestdetail;
 
 INSERT INTO stor VALUES(NULL, 101, 1000, 'A1');
@@ -977,6 +977,50 @@ SELECT * FROM requestdetail;
 SELECT * FROM seller;
 SELECT * FROM stor;
 SELECT * FROM trans;
+```
+
+### 자체 제작 문제
+```SQL
+-- 특정조건 고객이 구매한 상품내역 조회
+-- 특정조건의 품목을 구매한 고객 조회
+-- 특정 업체에서 판매하는 상품을 구매한 고객 조회
+-- 특정 상품을 구매한 고객의 총 구매 금액
+-- 특정 상품의 보관장소 등등
+
+-- 1. 남자고객 중 과일/채소를 장바구니에 넣은사람(고객이름, 고객성별, 카테고리번호, 상품이름)
+SELECT cu.cname, cu.gender, it.cateid, it.name FROM customer cu
+INNER JOIN cart ca ON cu.custid = ca.custid
+INNER JOIN item it ON ca.itemid = it.itemid
+WHERE cu.gender Like '남'
+AND it.cateid IN(10, 11, 12);
+
+-- 2. 서울 거주중인 사람중 구매액이 가장 큰사람
+SELECT cname,(rdcnt*price) AS bill FROM customer cu
+INNER JOIN request req ON cu.custid = req.custid
+INNER JOIN requestdetail red ON req.rqid = red.rqid
+INNER JOIN item it ON red.itemid = it.itemid
+ORDER BY bill DESC
+LIMIT 0,1; 
+-- 이거는 원하는 의도가 아직 잘 안됌
+
+-- 3. 판매자'노주희'가 파는 물건 중 가장 비싼 물건
+SELECT * FROM seller se
+INNER JOIN item it ON se.sellid = it.sellid
+WHERE seller = '노주희'
+ORDER BY price DESC
+LIMIT 0,1;
+
+-- 4. 정희천이 장바구니 총금액
+SELECT cu.cname, (ca.cnt*it.price) AS total FROM customer cu
+INNER JOIN cart ca ON cu.custid=ca.custid
+INNER JOIN item it ON ca.itemid=it.itemid
+WHERE cu.cname = '정희천';
+
+-- 5. 신용카드로 결재한 사람 중 성이 강씨 인 사람
+SELECT * FROM customer cu
+INNER JOIN request re ON cu.custid=re.custid
+WHERE re.pay = '신용카드'
+AND cu.cname = '강%';
 ```
 ## 프로그래머스
 ### level 1 예제

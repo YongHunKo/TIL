@@ -32,4 +32,15 @@
 <!--제목 글자 생성 명령어, 속성은 블록 속성이라 한줄을 다씀 = 민폐-->
 <a href="/">
 <!--큰따옴표안의 템플릿으로 이동, #을 넣으면 재자리-->
+<table>
+		<thead>
+			<tr><th width="150">NAME</th><th width="150">IMAGE</th><th width="150">PRICE</th><th width="150">BUY</th><th width="150">CART</th></tr>
+		</thead>
+		<tbody>
+			<tr><th>meat</th><th><img src="img/m1.jfif" width="100"></th><th>20000</th><th><a href="#">BUY</a></th><th><a href="#">CART</a></th></tr>
+		</tbody>
+	</table>
+<!--이런식으로 테이블을 생성도 할 수 있고 명령어 안에 길이도 설정할 수 있고 템플릿링크도 넣을 수 있다-->
+<img src="리소스-스태틱-img폴더 안에 있는 이미지파일">
+<video src="img폴더 안에 있는 동영상파일" controls="controls"></video>
 ```

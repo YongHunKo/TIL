@@ -360,6 +360,8 @@ public class Cust {
 </html>
 ```
 ![](/image/2022-09-07-02-36-04.png)
+
+
   - css03
 ```HTML
 <!DOCTYPE html>
@@ -400,7 +402,7 @@ public class Cust {
 	 	width:300px;
 	 	border:1px solid black;
 	 	border-collapse: collapse;
-	 	
+	 	/*표와 셀 사이의 테두리여백 제거*/
 	 }
 	 #cust_tb , tr , td, th{
 	 	border:1px solid black;
@@ -420,7 +422,11 @@ public class Cust {
 	 	background: gray;
 	 }
 ```
+![](/image/2022-09-07-02-45-03.png)
+
+
   - css04
+```HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -430,6 +436,7 @@ public class Cust {
 	* {
 		margin:0;
 		padding:0;
+    /*패딩은 내용과 선사이의 거리를 뜻함*/
 	}
 	div {
 		width:300px;
@@ -475,3 +482,66 @@ public class Cust {
 </body>
 </html>
 ```
+![](/image/2022-09-07-02-45-43.png)
+
+
+  - css05
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	div {
+		width:100px;
+		height:100px;
+		/* float:left; */
+		/*float은 블럭만 됨, 그래서 어제 메뉴블럭을 정렬함*/
+		position: absolute;
+		opacity: 0.8;
+    /*투명도*/
+	}
+	#d1 {
+		background:red;
+		margin:30px 30px;
+		z-index: 100;
+		overflow: auto;
+	}
+	#d2 {
+		background:blue;
+		margin:60px 60px;
+		z-index: 10;
+	}
+	#d3 {
+		background:green;
+		margin: 90px 90px;
+		z-index: 20;
+  /*z-index는 인덱스마다 높이를 줘서 높은값이 위로 올라오게 만드는 것*/
+	}
+	#d1 > p {
+		width:50px;
+		margin:0 auto;
+	}
+</style>
+</head>
+<body>
+	<h1>CSS05</h1>
+</body>
+	<div id = "d1">
+	<p>Para</p>
+	<p>Para</p>
+	<p>Para</p>
+	<p>Para</p>
+	<p>Para</p>
+	<p>Para</p>
+	</div>
+	<div id = "d2"></div>
+	<div id = "d3"></div>
+</html>
+```
+![](/image/2022-09-07-02-46-47.png)

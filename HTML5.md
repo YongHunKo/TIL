@@ -294,4 +294,184 @@ public class Cust {
 	}
 	/*p 안에 있는 span을 가리키는 말*/
   ```
-  ![](/image/2022-09-07-02-21-37.png)
+  ![css1](/image/2022-09-07-02-21-37.png)
+
+  - css02
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	a {
+		color:black;
+		text-decoration: none;
+	}
+	a:hover {
+		color:red;
+	}
+	/*hover는 커서를 올릴 시 라는 뜻*/
+	ul,ol {
+		list-style:none;
+		/*ul과ol의 기본쩜쩜을 없애겠다*/
+	}
+	ul > li:nth-child(1) {
+		color:blue;
+	}
+	ul > li:nth-child(1) >a {
+		background:blue;
+	}
+	/*2n = 짝수, 2n+1 = 홀수를 ()안에 넣기가능*/
+	
+	input [name="id"]{
+		background:gray;
+	}
+	h1:hover {
+	/*커서를 올리면 변함*/
+		color:red;
+		background:black;
+	}
+	p::first-line {
+		color:pink;
+	}
+	p::selection { 
+		background:yellow;
+	}
+</style>
+</head>
+<body>
+	<h1>CSS02</h1>
+	<h2><a href="#">Click</a></h2>
+	<ul>
+		<li><a href="#">MENU1</a>a</li>
+		<li><a href="#">MENU2</a></li>
+		<li><a href="#">MENU3</a></li>
+		<li><a href="#">MENU4</a></li>
+		<li><a href="#">MENU5</a></li>
+	</ul>
+	<p>ParagraphParagraphParagrap<br>hParagraph</p>
+	<form>
+		ID<input type="text" name="id"><br>
+		PWD<input type="password" name="pwd"><br>
+		<input type="submit" value="LOGIN">
+	</form>
+</body>
+</html>
+```
+![](/image/2022-09-07-02-36-04.png)
+  - css03
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/css03.css">
+<style>
+	 body {
+	 background-image: url("img/bg.png");
+	 }
+</style>
+</head>
+<body>
+	<h1>CSS03</h1>
+	<table id="cust_tb">
+		<thead>
+			<tr><th>id</th><th>pwd</th><th>name</th></tr>
+		</thead>	
+		<!--테이블헤드-->
+		<tbody>
+			<tr><td>id01</td><td>pwd01</td><td>이말숙</td></tr>
+			<tr><td>id01</td><td>pwd01</td><td>이말숙</td></tr>
+			<tr><td>id01</td><td>pwd01</td><td>이말숙</td></tr>
+			<tr><td>id01</td><td>pwd01</td><td>이말숙</td></tr>
+			<tr><td>id01</td><td>pwd01</td><td>이말숙</td></tr>
+		</tbody>
+		<!--테이블바디-->
+	</table>
+</body>
+</html>
+```
+```css
+@charset "EUC-KR";
+
+#cust_tb {
+	 	width:300px;
+	 	border:1px solid black;
+	 	border-collapse: collapse;
+	 	
+	 }
+	 #cust_tb , tr , td, th{
+	 	border:1px solid black;
+	 }
+	 #cust_tb >thead > tr > th{
+	 	font-family: 'Antonio', sans-serif;
+	 }
+	 
+	 #cust_tb >tbody > tr > td{
+	 	 text-align: center;
+	 	 font-family: 'Noto Sans KR', sans-serif;
+	 }
+	 #cust_tb > tbody > tr:nth-child(2n+1){
+	 	background:yellow;
+	 }
+	 #cust_tb > tbody > tr:hover{ 
+	 	background: gray;
+	 }
+```
+  - css04
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	div {
+		width:300px;
+		height:300px;
+		border:2px solid red;
+	}
+	#d1 {
+		background:blue;
+		padding:10px;
+	}
+	/*이거 안쪽여백padding을 줄경우 박스 크기가 달라져버림!! 매우 주의*/
+	#d1 > span {
+		margin:10px;
+	}
+	/*이렇게 주면 인라인이기때문에 크기변형없이 10띄워짐*/
+	/*인라인인걸 블락으로 바꾸려면 마진위쪽에 display:block;을 추가하면됨*/
+	#d2 {
+		background:yellow;
+		margin:10px 20px;
+		/*값 1개면 모든방향 2개면 x축y축 4개면 북동서남*/
+		display:none;
+		/*사라지는데 그 존재 자체가 사라져버림*/
+		/* visibility: hidden; 은 보이는것만 사라짐 존재는 있음 */
+	}
+	#d3 {
+		background:green;
+		margin:0 auto;
+		/*화면 크기가 바뀌어도 항상 가운데  */
+	}
+</style>
+</head>
+<body>
+	<h1>CSS04</h1>
+	<div id="d1">
+		<span>SPAN</span>
+	</div>
+	<div id="d2">
+		
+	</div>
+	<div id="d3">
+		
+	</div>
+</body>
+</html>
+```

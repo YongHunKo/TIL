@@ -44,3 +44,254 @@
 <img src="리소스-스태틱-img폴더 안에 있는 이미지파일">
 <video src="img폴더 안에 있는 동영상파일" controls="controls"></video>
 ```
+  - 로그인창 형식
+```HTML
+<form ation="/loginimpl" method="post">
+  <fieldset>
+    <legend>LOGIN</legend>
+    <label for="id">ID</label>
+    <input id="id" type='text' name="fid">
+    <!--legend라는 LOGIN을 전체적으로 두르는 선을 만들고-->
+    <!--ID라는 라벨을 만들어서 붙여주고-->
+    <!--입력창의 프로그래밍명은"id"이고 타입은 문자입력이고 fid라는 객체에 데이터를 저장-->
+    <label for="pwd">PWD</label>
+    <input id="pwd" type='password' name="fpwd">
+    <!--타입만 다른데 password타입은 입력시 쩜쩜쩜으로 보임-->
+    <input type="submit" value="LOGIN">
+    <!--LOGIN이라고 써진 버튼을 만든다-->
+    <!--마지막으로 이 form이 실행되면 loginimpl메소드를 실행시키며 입력정보들을 url에 표시함(post방식)-->
+    </fieldset>
+</form>
+```
+  - 회원가입창 형식
+```HTML
+<form action="/registerimpl" method="get">
+		ID<input type="text" name="id"><br>
+		PWD<input type="password" name="pwd"><br>
+		AGE<input type="number" name="age"><br>
+		BIRTH<input type="date" name="birth"><br>
+		HOBBY<br>
+		<input type="checkbox" name="hobby" value="t">Train
+		<input type="checkbox" name="hobby" value="s">Study
+		<input type="checkbox" name="hobby" value="n">Netplex<br>
+		<!-- 입력값이 아니라서 value를 선택해야함 그래서 미리 value를 지정 -->
+		<!-- 또 얘는 여러개 값을 중복체크하는 방식이라 쪼끔 고민해야함 -->
+		GENDER<br>
+		Female<input type="radio" name="gender" value="f">
+		Male<input type="radio" name="gender" value="m">
+		Aje<input type="radio" name="gender" value="a"><br>
+    <!--radio타입은 선택지중 1택만 가능한 타입-->
+		CAR<br>
+		<select name="car">
+			<option value="k1">K1</option>
+			<option value="k2">K2</option>
+			<option value="k3">K3</option>
+		</select>
+		<br>
+		<!-- IMAGE<input type="file" name="img"><br> -->
+		TA<textarea rows="10" cols="30" name="ta"></textarea>
+		<input type="submit" value="REGISTER">
+	</form>
+  ```
+  - 메인컨트롤러 수정
+```java
+/*
+*지금은 여기서 로그인가능한 값(qqq,111)을 줘서
+*입력값이 맞으면 홈으로 이동 다르면 loginfail이
+*실행되도록 하였다
+*기본적으로 scanner 이런건 쓰지않고 html로 입력을
+*직접 받기때문에 받아오려는 input값에서 설정한 *name값을 따오면된다
+*나머지는 if+equals로 String들이 일치하는지 판별 
+*/
+@RequestMapping("/loginimpl")
+	public String loginimpl(String fid, String fpwd) {
+		System.out.println("Login Impl");
+		System.out.println(fid+" "+fpwd);
+		String next = null;
+		if(fid.equals("qqq")&&fpwd.equals("111")) {
+			next = "start";
+		}else {
+			next = "loginfail";
+		}
+		return next;
+	}
+	@RequestMapping("/registerimpl")
+	public String registerimpl(Cust cust) {
+    //Cust클래스를 임포트 해줘야함
+		System.out.println(cust);
+		return "start";
+	}
+	@RequestMapping("/css")
+	public String css01(String page) {
+    //css가 반복되어버려서 html로 쉽게 반복할 수 있도록 구현해놓음 후에 기술예정
+		return page;
+  }
+```
+  - Cust
+```java
+import java.util.Arrays;
+
+public class Cust {
+	private String id;
+	private String pwd;
+	private int age;
+	private String birth;
+	private String[] hobby;
+	private String gender;
+	private String car;
+	private String ta;
+
+	public Cust() {
+	}
+
+	public Cust(String id, String pwd, int age, String birth, String[] hobby, String gender, String car, String ta) {
+		this.id = id;
+		this.pwd = pwd;
+		this.age = age;
+		this.birth = birth;
+		this.hobby = hobby;
+		this.gender = gender;
+		this.car = car;
+		this.ta = ta;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String[] getHobby() {
+		return hobby;
+	}
+
+	public void setHobby(String[] hobby) {
+		this.hobby = hobby;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getCar() {
+		return car;
+	}
+
+	public void setCar(String car) {
+		this.car = car;
+	}
+
+	public String getTa() {
+		return ta;
+	}
+
+	public void setTa(String ta) {
+		this.ta = ta;
+	}
+
+	@Override
+	public String toString() {
+		return "Cust [id=" + id + ", pwd=" + pwd + ", age=" + age + ", birth=" + birth + ", hobby="
+				+ Arrays.toString(hobby) + ", gender=" + gender + ", car=" + car + ", ta=" + ta + "]";
+	}
+
+}
+//따로 초기설계클래스를 만들어주었다
+//필드값+기본생성자+필드생성자+getter/setter+toString으로 이루어짐
+```
+  - CSS여러개 준비하기
+```HTML
+  <h3><a href="/css?page=css01">CSS01</a></h3>
+	<h3><a href="/css?page=css02">CSS02</a></h3>
+	<h3><a href="/css?page=css03">CSS03</a></h3>
+	<h3><a href="/css?page=css04">CSS04</a></h3>
+	<h3><a href="/css?page=css05">CSS05</a></h3>
+	<h3><a href="/css?page=css06">CSS06</a></h3>
+	<h3><a href="/css?page=css07">CSS07</a></h3>
+	<h3><a href="/css?page=css08">CSS08</a></h3>
+  <!--이런식으로 a태그에 css폴더속에 cssXX번을 끌고와라 를 표현-->
+```
+  - css01
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/css01.css">
+<style>
+	* {
+		margin:0;
+		padding:0;
+		/*바깥쪽 안쪽 여백을 없애라*/
+	}
+	p {
+		color:gray;
+	}
+</style>
+</head>
+<body>
+	<h1>CSS01</h1>
+	<h1 id="hh1">Header1</h1>
+	<h2>Header2</h2>
+	<h2 class="cc1">Header2</h2>
+	<p class="cc1">Paragraph</p>
+	<p>Parag<span>raph</span></p>
+</body>
+</html>
+```
+```css
+@charset "EUC-KR";
+
+	h1 {
+		color:red;
+		background:black;
+		/*태그*/
+	}
+	#hh1 {
+		color:yellow;
+		background:blue;
+	}
+	/*사실은 h1에 색칠을 다하고 hh1에 덧칠을 한 개념*/
+	/*id*/
+	.cc1 {
+		color:pink;
+		background:red;
+	}
+	/*클래스*/
+	p > span {
+		color:red;
+	}
+	/*p 안에 있는 span을 가리키는 말*/
+  ```
+  ![](/image/2022-09-07-02-21-37.png)

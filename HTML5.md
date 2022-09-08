@@ -26,7 +26,7 @@
   16. 메소드를 만들어줬으면 이제 메소드에 해당하는 템플릿을 작성해줘야함
   17. 템플릿 작성시 생성위치 꼭 잘 봐야함
   18. 여기까지가 기본생성하는 방법
-- 기본 명령어
+## 기본 명령어
 ```HTML
 <h1></h1>
 <!--제목 글자 생성 명령어, 속성은 블록 속성이라 한줄을 다씀 = 민폐-->
@@ -44,7 +44,7 @@
 <img src="리소스-스태틱-img폴더 안에 있는 이미지파일">
 <video src="img폴더 안에 있는 동영상파일" controls="controls"></video>
 ```
-  - 로그인창 형식
+## 로그인창 형식
 ```HTML
 <form ation="/loginimpl" method="post">
   <fieldset>
@@ -63,7 +63,7 @@
     </fieldset>
 </form>
 ```
-  - 회원가입창 형식
+## 회원가입창 형식
 ```HTML
 <form action="/registerimpl" method="get">
 		ID<input type="text" name="id"><br>
@@ -93,7 +93,7 @@
 		<input type="submit" value="REGISTER">
 	</form>
   ```
-  - 메인컨트롤러 수정
+## 메인컨트롤러 수정
 ```java
 /*
 *지금은 여기서 로그인가능한 값(qqq,111)을 줘서
@@ -127,7 +127,7 @@
 		return page;
   }
 ```
-  - Cust
+## Cust
 ```java
 import java.util.Arrays;
 
@@ -229,7 +229,7 @@ public class Cust {
 //따로 초기설계클래스를 만들어주었다
 //필드값+기본생성자+필드생성자+getter/setter+toString으로 이루어짐
 ```
-  - CSS여러개 준비하기
+## CSS여러개 준비하기
 ```HTML
   <h3><a href="/css?page=css01">CSS01</a></h3>
 	<h3><a href="/css?page=css02">CSS02</a></h3>
@@ -241,7 +241,7 @@ public class Cust {
 	<h3><a href="/css?page=css08">CSS08</a></h3>
   <!--이런식으로 a태그에 css폴더속에 cssXX번을 끌고와라 를 표현-->
 ```
-  - css01
+## css01
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -296,7 +296,7 @@ public class Cust {
   ```
   ![css1](/image/2022-09-07-02-21-37.png)
 
-  - css02
+## css02
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -362,7 +362,7 @@ public class Cust {
 ![](/image/2022-09-07-02-36-04.png)
 
 
-  - css03
+## css03
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -425,7 +425,7 @@ public class Cust {
 ![](/image/2022-09-07-02-45-03.png)
 
 
-  - css04
+## css04
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -485,7 +485,7 @@ public class Cust {
 ![](/image/2022-09-07-02-45-43.png)
 
 
-  - css05
+## css05
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -545,3 +545,509 @@ public class Cust {
 </html>
 ```
 ![](/image/2022-09-07-02-46-47.png)
+	
+## css06
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+	a{
+		text-decoration : none;
+		color : black;
+	}
+	ul, li{
+		list-style : none;
+	}
+	ul{
+		width : 500px;
+		height : 40px;
+		border-top : 3px solid black;
+		border-bottom : 3px solid black;
+		margin : 0 auto; 
+		/* 화면중앙으로 맞춤 */
+	}
+	ul > li {
+		float : left;
+		margin : 0px 20px;
+		line-height : 40px;
+	}
+	/* ul아래 li들의 방향을 바꾼다 왼쪽부터 오른쪽으로 */
+	/* 각각 x축으로 0px y축으로 10px을 떨어뜨린다 */
+	/* 라인하이트는 높이에 맞춰서 중앙으로 맞춤 */
+	ul > li > a:hover{
+		color : red;
+		font-weight : bold;
+	}
+	
+</style>
+</head>
+<body>
+	<ul>
+		<li><a href="#">HTML5</a></li>
+		<li><a href="#">CSS3</a></li>
+		<li><a href="#">JavaScript</a></li>
+		<li><a href="#">JQuery</a></li>
+		<li><a href="#">AJAX</a></li>
+	</ul>
+</body>
+</html>
+```
+![](/image/HTML,CSS/2022-09-09-03-16-18.png)
+## css07
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/css07.css">
+<style>
+	a{
+		text-decoration : none;
+		color : black;
+	}
+</style>
+</head>
+<body>
+	<h1>CSS07</h1>
+	<div class="big_bt">
+		<a href="#">CLICK</a>
+	</div>
+	<!-- div가 어찌보면 하나의 박스를 의미함 -->
+	<!-- 또한 얘들만 적용시킬라고 id대신에 class를 줌 -->
+</body>
+</html>
+```
+```css
+@charset "EUC-KR";
+@import url('https://fonts.googleapis.com/css2?family=Antonio&family=Source+Code+Pro&display=swap');
+/* Big Button CSS Start ---------*/
+	.big_bt{
+		margin : 5px auto;
+		width:120px; height:50px;
+		background-color:red;
+		border:3px solid white;
+		border-radius:20px;
+		box-shadow: 3px 3px 3px gray;
+	}
+	/* 클래스는 . 으로 가져옴 */
+	.big_bt > a{
+		font-family: 'Source Code Pro', monospace;
+		display : block;
+		text-align : center;
+		font-size : 130%;
+		font-weight : bold;
+		color : white;
+		line-height : 50px; 
+	}
+	/* a의 영역이 글자크기만큼밖에 생성이안됨 = a를 변경시키자 */
+	/* 높이는 밖에 div에 맞추는건 height가 아니라 line-height */
+	.big_bt:hover{
+		border : 3px solid yellow;
+	}
+	.big_bt > a:hover{
+		color : yellow;
+	}
+	/* Big Button CSS End -----------*/
+```
+![](/image/HTML,CSS/2022-09-09-03-17-54.png)
+- 버튼을 만드는 예제였음
+- 호버기능까지 줘서 커서를 가져가면 변함
+## css08
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/css07.css">
+<link rel="stylesheet" href="css/css08.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<header>
+		<ul id="h_top">
+			<li><a href="#">LOGIN</a></li>
+			<li><a href="#">REGISTER</a></li>
+			<li><a href="#">ABOUT US</a></li>
+		</ul>
+		<h1>HTML5 & CSS3.0</h1>
+		<ul id="h_bottom">
+			<li><a href="#">HTML5</a></li>
+			<li><a href="#">CSS3</a></li>
+			<li><a href="#">JavaScript</a></li>
+			<li><a href="#">JQuery</a></li>
+			<li><a href="#">AJAX</a></li>
+		</ul>
+	</header>
+	<nav>
+	</nav>
+	<section>
+		<aside id="left_a">
+				<div class="big_bt">
+					<a href="#">CLICK</a>
+				</div>
+				<div class="big_bt">
+					<a href="#">CLICK</a>
+				</div>
+				<div class="big_bt">
+					<a href="#">CLICK</a>
+				</div>
+		</aside>
+		<!-- 왼쪽에는 버튼을 넣을거임 -->
+		<aside id="center_a">
+			<div></div>
+			<div></div>
+		</aside>
+		<!-- 여기는 컨텐츠를 넣을생각 -->
+		<aside id="right_a">
+			<img src="https://via.placeholder.com/80x50">
+			<img src="https://via.placeholder.com/80x50">
+			<img src="https://via.placeholder.com/80x50">
+			<img src="https://via.placeholder.com/80x50">
+			<img src="https://via.placeholder.com/80x50">
+			<img src="https://via.placeholder.com/80x50">
+		</aside>
+		<!-- 오른쪽엔 광고를 넣을거임 -->
+		<!-- 이걸 인라인에서 블락으로 바꿔서 센터로 놓고싶다 위에 가서 설정 -->
+	</section>
+	<footer>
+	</footer>
+</body>
+</html>
+```
+```css
+@charset "UTF-8";
+/* Global Header CSS */
+	*{
+		margin:0;
+		padding:0;
+	}
+	a{
+		text-decoration : none;
+		color:black;
+	}
+	ul,ol{
+		list-style:none;
+	}
+	
+	
+	/* Start Header CSS------- */
+	header{
+		width : 800px;
+		height : 120px;
+		margin : 0 auto;
+		background : red;
+	}
+	header > h1{
+		width : 500px;
+		height : 50px;
+		text-align : center;
+		margin : 0 auto;
+	}
+	header > #h_bottom{
+		width : 500px;
+		height : 40px;
+		border-top : 3px solid black;
+		border-bottom : 3px solid black;
+		margin : 0 auto; 
+	}
+	header > #h_bottom > li {
+		float : left;
+		margin : 0px 20px;
+		line-height : 40px;
+	}
+	header > #h_bottom > li > a:hover{
+		color : white;
+		font-weight : bold;
+	}
+	header > #h_top {
+		width : 800px;
+		height : 20px;
+	}
+	header > #h_top >  li {
+		float : right;
+	}
+	/* End Header CSS------- */
+	
+	
+	
+	/* Start Nav CSS------- */
+	nav{
+		width : 800px;
+		height : 30px;
+		margin : 0 auto;
+		background : #997000;
+	}
+	/* End Nav CSS------- */
+	
+	
+	
+	/* Start Section CSS------- */
+	section{
+		width : 800px;
+		height : 600px;
+		margin : 0 auto;
+		background : #D5D5D5; 
+	}
+	section > aside{
+		float : left;
+		/* 박스는 이러헥 왼쪽으로 정렬시키면 순서대로된다 */
+	}
+	section > #left_a{
+		width: 150px;
+		height : 600px;
+		background : #F5D6D6;
+	}
+	section > #center_a{
+		width: 550px;
+		height : 600px;
+		background : #C6D6D6;
+	}
+	section > #center_a > div{
+		width: 500px;
+		height : 250px;
+		border : 2px solid black;
+		margin : 10px auto;
+	}
+	section > #center_a > div:hover{
+		background : gray;
+		border : 2px solid black;
+	}
+	section > #right_a{
+		width: 100px;
+		height : 600px;
+		background : #E7D6D6;
+	}
+	section > #right_a > img{
+		display : block;
+		margin : 5px auto;
+	}
+	/* End Section CSS------- */
+	
+	
+	/* Start Footer CSS------- */
+	footer{
+		width : 800px;
+		height : 30px;
+		margin : 0 auto;
+		background : black; 
+	}
+	/* End footer CSS------- */
+	/* 전체적인 모양부터 만든다 */
+```
+- 기본적인 틀은 `bootstrap`으로 가져와서 함
+- css를 여러개 링크도 가능하다는걸 알게됨
+- 대체로 부트스트랩을 따오면 되는거 같음
+- 우리가 직접 그리지 않아도 이미 널려있는게 많음
+![](/image/HTML,CSS/2022-09-09-03-22-17.png)
+## css09
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<title>Insert title here</title>
+<style>
+	@media screen and (max-width:767px){
+		body{
+			background:red;color:white;
+		}
+		div{
+			width : 400px;
+			height : 300px;
+			background : white;
+		}
+	}
+	@media screen and (min-width:768px) and (max-width:959px){
+		body{
+			background:blue;color:white;
+		}
+		div{
+			width : 600px;
+			height : 400px;
+			background : yellow;
+		}
+	}
+	@media screen and (min-width:960px){
+		body{
+			background:black;color:white;
+		}
+		div{
+			width : 800px;
+			height : 600px;
+			background : white;
+		}
+	}
+	/* 반응형 웹 먼저 바디를 설정하고 meta를 변경 */
+	/* 화면 사이즈에 따라 배경색이 달라짐 */
+</style>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
+```
+- 반응형 웹에 대한 예제
+- 화면 크기를 일정크기에 맞춰서 재구성함
+- 각각 사용하는 디바이스 디스플레이 환경에 따라 설정함
+
+## 특정 부분은 고정시키고  일부분만 바꾸기
+```java
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MainController {
+	@RequestMapping("/")
+	public String main() {
+		return "main";
+
+	}
+	
+	@RequestMapping("/about")
+	public String about(Model model) {
+		model.addAttribute("center","about");
+		model.addAttribute("left","left_about");
+		return "main";
+
+	}
+	
+	@RequestMapping("/projects")
+	public String projects(Model model) {
+		model.addAttribute("center","projects");
+		model.addAttribute("left","left_projects");
+		return "main";
+
+	}
+	@RequestMapping("/contact")
+	public String contact(Model model) {
+		model.addAttribute("center","contact");
+		model.addAttribute("left","left_contact");
+		return "main";
+		// 일종의 치환 개념
+	}
+}
+```
+```HTML
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>My Page</title>
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+	height: 450px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	padding-top: 20px;
+	background-color: #f1f1f1;
+	height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {
+		height: auto;
+	}
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Logo</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/projects">Projects</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+							Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-2 sidenav" th:insert="${left} ? ${left} : left">
+			</div>
+
+			<!-- Main Center Start -->
+			<div class="col-sm-8 text-left"
+				th:insert="${center} ? ${center} : center">
+				<!-- ${center}센터 값이 존재하지 않으면 우리가 만들어 놓은 center.html을 실행해라 -->
+			</div>
+			<!-- Main Center End -->
+			<div class="col-sm-2 sidenav">
+				<div class="well">
+					<p>ADS</p>
+				</div>
+				<div class="well">
+					<p>ADS</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid text-center">
+		<p>Footer Text</p>
+	</footer>
+</body>
+</html>
+```
+- 각 메소드에 객체를 입력하고 `객체.addAttribute(x,y)`를 하여 치환 하는 개념으로 메소드 실행시 x.html을 y.html로 바뀌는 것
+- 즉 바꾸려는 것 외에는 그대로인데 바꾸고싶은 것만 바뀌는 것    
+**<전>**
+![](/image/HTML,CSS/2022-09-09-03-39-13.png)
+**<다른 곳을 누른 후>**
+![](/image/HTML,CSS/2022-09-09-03-40-18.png)

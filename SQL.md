@@ -1024,6 +1024,11 @@ INNER JOIN request re ON cu.custid=re.custid
 WHERE re.pay = '신용카드'
 AND cu.cname = '강%';
 ```
+### ERD 개선
+![](/image/SQL/2022-09-09-13-56-43.png)
+- 다음 스샷과 같이 개선을 해보았다
+- 최소한의 필요항목만 넣었고
+- 프라이머리키와 유니크를 반드시 들어가게 하였다
 ## 프로그래머스
 ### level 1 예제
 - 220904 7문제를 품

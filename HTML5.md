@@ -1051,3 +1051,296 @@ footer {
 ![](/image/HTML,CSS/2022-09-09-03-39-13.png)
 **<다른 곳을 누른 후>**
 ![](/image/HTML,CSS/2022-09-09-03-40-18.png)
+
+## 컨트롤러와 템플릿의 분리 - 세분화
+- 메인컨트롤러에 모든 클래스를 담기에는 너무 길어진다
+- 따라서 공통점이 있는 클래스들 끼리 따로 빼버린다
+![](/image/HTML,CSS/2022-09-14-02-33-25.png)
+![](/image/HTML,CSS/2022-09-14-02-34-22.png)
+![](/image/HTML,CSS/2022-09-14-02-35-03.png)
+- 여기서 주의해야 할건 세부적인 컨트롤러는 시작에 컨트롤러와 맵핑을 같이 붙여준다.
+- 마찬가지로 템플릿도 따로 묶어서 할 수 있다
+- ![](/image/HTML,CSS/2022-09-14-02-37-38.png)
+- 위에서 썼던 $를 사용해서 센터와 왼쪽을 바꾼다
+### day04 - js01
+```javascript
+<meta charset="utf-8">
+
+<script>
+window.onload = function(){
+	// 3. 그래서 이걸 넣어서 순서를 변경하는 것
+	// 얘들은 건너뛰고 아래에 바디를 실행하고 와서 이걸 실행한다
+	// 이러면 이제 'REPLACE TEXT...'가 뜸
+	var h2 = document.querySelector('h2');
+	//1. 문서안에서 클래스, 태그, 아이디도 가져올수 있는 거
+	//js에서는 ' 을 쓴다
+	// 가져와 그리고 이걸 넣어
+	h2.innerHTML = 'REPLACE TEXT...';
+	//2. js는 위에서 부터 쭉 실행 되는데 아직 h2가 구현이 안된상황
+	//h2 자리에 Header2라고 뜸
+};
+</script>
+
+<h1>JS01 Center</h1>
+<h2>Header2</h2>
+<p>Paragraph</p>
+```
+- js의 특징 1
+### day04 - js02
+```javascript
+<script>
+window.onload = function(){
+	//alert('Alert');
+	// 화면이 뿌려진 후에 알트 발동
+	var h1 = document.querySelector('h1');
+		// js에서 변수 선언은 var
+	//h1.innerHTML = 'TEXT..';
+		// h1 안에 'TEXT..'를 넣으세요
+	h1.innerHTML = '<a href="">CLICK</a>'
+	// 링크넣기도가능
+	
+	var h2 = document.querySelector('#hh2');
+	h2.innerHTML = 'H2 TEXT';
+	
+	var h3 = document.querySelector('.cc1');
+	h3.innerHTML = 'CC1 class';
+	// 근데 클래스를 두개 묶었는데 하나만 적용됨
+	
+	var a = 10;
+	var b = 20;
+	//alert(a+b);
+	//console.log('RESULT:'+(a+b));
+	
+	h2.innerHTML = (a+b);
+	// 나중에 바꾼걸로 덮어씌워짐
+};
+
+
+</script>
+
+<h1>JS02 Center</h1>
+<h2 id="hh2">JS02 Center</h2>
+<h3 class="cc1">JS02 Center</h3>
+<h4 class="cc1">JS02 Center</h4>
+<h5>JS02 Center</h5>
+```
+- js의 특징 2
+
+### day04 - js03
+```javascript
+<script>
+
+var n1 = 10;
+var n2 = 10.2;
+
+var b = true;
+//블린값 줄때 소문자로 줘야함.
+var s1 ='abc';
+// 자바에서 string은 레퍼런스 타입이지만 js에선 그냥 var
+var s2 = "abc";
+
+var a = [1,'a',true];
+// js에선 다양한 타입 넣기 가능, 배열도 object타입
+var o = {'name':'james','age':10};
+// js의 객체
+var o2 = [
+	{'name':'james','age':10},
+	{'name':'james','age':10},
+	{'name':'james','age':10}
+];
+// 배열안에 객체넣기
+// -->이런 오브젝트를 표현한 것들을 제이슨이라고 함
+var f = function(){
+	return 10;
+};
+// 변수안에 함수넣기 가능
+var u;
+// undefined 로 냅두는 것
+
+/* alert(typeof(a));
+console.log(typeof(a)); 타입확인용 방법 2가지*/
+
+var d1 = 10;
+var d2 = '20';
+
+var result = d1+d2;//1020이 나옴
+var result = d1*d2;//어라 얘는 되네 200, + 만 안되는
+var result = d1+Number(d2);//타입변환시키는 방법
+// 타입변환이 안돼는 애들이면 Nan이 나옴
+
+var data = Math.max(1,5,3,6,7,100);
+alert(data);
+</script>
+<h1>JS03 Center</h1>
+```
+- js의 특징 3
+
+### day04 - js04
+```javascript
+<script>
+
+var str = 'abcdefg';
+var len = str.length;
+var s = str.charAt(2);
+// 두번째에 있는 변수가 뭐냐 = 0부터시작 = c
+var s2 = str.indexOf('d');
+// 너 몇번째니 = 3
+
+//<예제>id와 도메인 분리하기
+var mail = 'jmlee@tonesol.com';
+var id = mail.substring(0,mail.indexOf('@'));
+var domain = mail.substring(mail.indexOf('@')+1,mail.indexOf('.'));
+alert(id);
+alert(domain);
+//alert로 확인하기
+
+
+
+</script>
+
+<h1>JS04 Center</h1>
+```
+- js특징 4
+
+### day04 - js05
+```javascript
+<style>
+	#center_div{
+		width:200px;
+		border:2px solid red;
+	}
+</style>
+
+<script>
+
+/* var a = [1,2,3,4,5]; */
+/* for(var i=0; i<a.length;i++){
+	alert(a[i]);
+}; 잘 안씀*/
+/* for(var i in a){
+	alert(a[i]);
+}; */
+// js의 확장된 for문
+window.onload = function(){
+	//배열을 div칸 화면에 뿌리고싶다
+	var data = ['ABC','DEF','GHI','JKL'];
+	var result = '';
+	var center = document.querySelector('#center_div');
+	for(var i in data){
+		result +='<h1>'+data[i]+'</h1>';
+	};
+	center.innerHTML = result;
+};
+
+</script>
+
+
+<h1>JS05 Center</h1>
+<div id="center_div">
+</div>
+```
+- js의 특징 5
+
+### day04 - js06
+```javascript
+<meta charset="utf-8">
+
+<style>
+	#center_div{
+		width:400px;
+		border:2px solid red;
+	}
+</style>
+
+<script>
+window.onload = function(){
+	//제이슨 데이터를 어떻게 뽑아서 표현할 것이냐
+	var data = [
+		{'num':1,'title':'오징어게임','updown':'up'},
+		{'num':2,'title':'태풍','updown':'down'},
+		{'num':3,'title':'러시아','updown':'up'},
+		{'num':4,'title':'우크라이나','updown':'down'},
+		{'num':5,'title':'전쟁','updown':'up'}
+	];
+	
+	var result = '';
+	var center = document.querySelector('#center_div');
+	//뿌릴 위치
+	for(var i in data){
+		result += '<h3>'+data[i].num+'. '+data[i].title+' '+data[i].updown+'</h3>';
+	};
+	center.innerHTML = result;
+};
+
+</script>
+
+
+<h1>JS06 Center</h1>
+<div id="center_div">
+</div>
+```
+- js특징 6, 실검처럼 표현하기
+
+### day04 - js07
+```javascript
+<script>
+/* f1();
+//얘는 실행됨
+f2();
+//얘는 안됨 */
+function f1(){
+	return 10;
+};
+var f2 = function(){
+	return 20;
+};
+
+var r1 = f1();
+var r2 = f2();
+
+
+function f3(a,b){
+	return a*b;
+};
+
+var result = f3(10,20);
+alert(result);
+</script>
+
+<h1>JS07 Center</h1>
+```
+- js특징 7
+
+### day04 - js08
+```javascript
+<script>
+function f1(){
+	return 10;
+};
+function f2(){
+	return 10;
+};
+
+function f3(g1,g2){
+	return 100 *g1()*g2();
+};
+
+var result = f3(f1,f2);
+// 함수에 함수넣기 가능
+
+// 그럼 반대로해도 되지않을까?
+function a1(){
+	return function(){//익명클래스 넣기
+		return 100;
+	};
+};		
+
+var r =a1();
+//r은 익명클래스가 됨
+var data = r();
+alert(data);
+</script>
+
+<h1>js08 Center</h1>
+```
+- js특징 8, 익명클래스를 구현

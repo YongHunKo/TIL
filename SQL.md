@@ -1041,6 +1041,24 @@ AND cu.cname = '강%';
 - `NULL`에 관한 문제들
 - 예전 예제중에 `IFNULL` 쓰는 예제를 좀 참고함
 
+### level 2 예제
+- `GROUP BY`
+- `~ LIKE '%A%'` = A가 들어가는 것들~
+- 최고의 문제는 중성화 여부 파악하기
+
+```sql
+SELECT ANIMAL_ID, NAME, CASE 
+WHEN SEX_UPON_INTAKE LIKE 'Neutered%' or SEX_UPON_INTAKE LIKE 'Spayed%' THEN 'O'
+ELSE 'X'
+END AS 중성화
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID;
+```
+- `case~end`부터 `when~then`까지 골고루 다씀
+- 이 문제를 이해하는 것이 lv.2의 핵심일듯
+- 220913 8문제 품
+  
+
 ## 새로 배운 것
 - `SELECT count(*) FROM ~`은 행 개수를 알려줌
 - `DISTINCT`는 중복된 값을 하나로 쳐줌 ->까먹은것

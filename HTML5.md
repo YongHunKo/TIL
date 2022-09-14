@@ -1344,3 +1344,460 @@ alert(data);
 <h1>js08 Center</h1>
 ```
 - js특징 8, 익명클래스를 구현
+
+
+### day04 -js09
+```javascript
+<script>
+var data = 'alert("ALERT")';
+eval(data);
+
+var result = '10+10+10';
+alert(eval(result));
+// 일반 스트링을 실행시켜줄수있음, 따옴표들을 빼버리는
+
+var result2 = 10/0;
+
+if(isFinite(result2)){
+	alert('Finite');
+}else{
+	alert('Infinite')
+};
+</script>
+
+<h1>JS09 Center</h1>
+```
+- `eval()`은 괄호안에 스트링중에 계산이 가능하면 가능하도록 하는 명령어
+
+### day04 - js10
+```javascript
+
+<script>
+window.onload = function(){
+	var hh1 = document.querySelector('#hh1');
+	var hh2 = document.querySelector('#hh2');
+	var hh3 = document.querySelector('#hh3');
+	var daum = document.querySelector('#daum');
+	
+	daum.onclick = function(){
+		var c = confirm('이동할거야?');
+		if(c){
+			location.href= 'http://www.daum.net';
+		}else{
+			return;
+		}
+	};
+	
+	hh1.onclick = function(){
+		//클릭시 발동
+		var txt = hh1.innerHTML;
+		//hh1의 텍스트를 가져와라
+		hh2.innerHTML = txt;
+		//hh2의 텍스트를 뿌려라
+		window.open('www.naver.com');
+		//링크를 열어버림
+	};
+	hh2.onclick = function(){
+		location.href='http://www.naver.com';
+		//~로 이동시켜라
+	};
+	
+	setInterval(function(){
+		var date = new Date();
+		var str = date.toString();
+		hh2.innerHTML =str;
+	}, 2000);
+	// 2초에 한번씩 날짜를 스트링으로 변환한걸 뿌린다
+	
+	/* setTimeout(() => {
+		location.href='/';
+	}, 5000);
+	// 5초뒤에 발동 */
+	
+	var si = setInterval(() => {
+		var str = hh3.innerHTML;
+		str += '*';
+		hh3.innerHTML = str;
+	}, 500);
+	
+	setTimeout(() => {
+		clearInterval(si);
+	}, 5000);
+};
+
+</script>
+
+<h1 id = "hh1">JS10 Center</h1>
+<h2 id = "hh2"></h2>
+<h3 id = "hh3"></h3>
+<h3><a id = "daum" href="#">Daum</a></h3>
+```
+- `onclick`은 클릭할때 발동하도록하는 것
+- 하이퍼링크를 쓰는 `<a href>`와 비슷
+
+### day04 - jq01
+```javascript
+<script>
+$(document).ready(function(){
+	$('.center>h1').css('color','red');
+	$('.center>h2').text('REPLACE');
+	$('.center>h2').css({'color':'red','background':'black'});
+	$('.center>h3').click(function(){
+		location.href='http://www.naver.com';
+	});
+});
+//$라는건 여기서부터 jq라는 걸 나타내는 것
+//문서가 준비되면 함수를 실행해라
+//여러개를 실행하려하면 제이슨을 사용하여 표현
+</script>
+
+<div class="center">
+	<h1>JQ01 Center</h1>
+	<h2>Header2</h2>
+	<h3>Header3</h3>
+</div>
+```
+- JQuery 기초
+- `$(document).ready(function(){});`안에서 이루어짐
+- `{}`안에서 실행하면됨
+- `$`로 시작함
+
+### day04 - jq02
+```javascript
+<style>
+	#cust_table{		
+		width:300px;
+		border:2px solid red;
+	}
+	.thead{
+		color:red;
+		background:black;
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		$('#cust_table > thead > tr').addClass('thead');
+		$('#cust_table > thead > tr').click(function(){
+			$('#cust_table > tbody').append('<tr><td>id01</td><td>pwd01</td><td>james</td></tr>');
+		});
+		$('#cust_table > tbody > tr').hover(function(){
+			$('#cust_table > tbody > tr').addClass('thead');
+		//'#cust_table > tbody > tr'를 반복할 필요 없이 this를 사용할 수 있다
+		}, function(){
+			$('#cust_table > tbody > tr').removeClass('thead');
+		});
+		//내 커서가 가는 곳에 앞함수, 아니면 뒷함수 발동
+		$('#cust_table > tbody > tr:eq(1)').addClass('thead');
+		/* $('#cust_table > tbody > tr').eq(1).addClass('thead'); */
+		//바로 위랑 같은말
+		// thead에 적용된 css클래스를 jq의 주어에 적용한다
+		/* $('#cust_table > tbody > tr:not(eq(1))').addClass('thead'); */
+		// eq1빼고 전부다 라는 조건
+		
+		$('#fin').click(function(){
+			$('#cust_table').slideDown();
+		});
+		$('#fout').click(function(){
+			$('#cust_table').slideUp();
+		});
+	});
+</script>
+
+<h1>JQ02 Center</h1>
+<button id="fin">FadeIN</button>
+<button id="fout">FadeOUT</button>
+<!-- 12. fadein fadeout과 자매품 slideDown slideUp -->
+<table id="cust_table">
+	<thead>
+		<tr><th>ID</th><th>PWD</th><th>NAME</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>id01</td><td>pwd01</td><td>james</td></tr>
+		<tr><td>id01</td><td>pwd01</td><td>james</td></tr>
+		<tr><td>id01</td><td>pwd01</td><td>james</td></tr>
+		<tr><td>id01</td><td>pwd01</td><td>james</td></tr>
+		<tr><td>id01</td><td>pwd01</td><td>james</td></tr>
+		
+	</tbody>
+</table>
+```
+- 테이블을 바꿀수도 있다
+
+### day04 - jq03
+```javascript
+<script>
+	$(document).ready(function(){
+		var str = $('.center > h1').text();
+		//1. h1의 텍스트를 가져온다
+		$('.center > h1').text('LOGIN');
+		//2. h1에 텍스트를 넣는다. 그러면 헤드h1은 LOGIN으로 변경
+		/* $('.center > h1').html('<a href="#">LOGIN</a>'); */
+		// 3. html도 가능
+		
+		$('#login_form > input[name="id"]').keyup(function(){
+			$('#login_form > #id_span').text('');
+		});
+		//6. '#login_form > input[name="id"]' 이건 form
+		// form에 keyup이라는 이벤트 발생하게되면 함수발동
+		// span 영역에 '' 을 넣는다
+		$('#login_form > input[name="id"]').blur(function(){
+			var id = $(this).val();
+			if(id.length < 4){
+				$('#login_form > #id_span').text('ID는 4자리 이상입력');
+				$(this).focus();
+			}
+		});
+		// 7.떠났을때 이벤트 발생한다. 아이디 길이가 짧으면 다시입력하라고 하려함
+		// 여기서 this는 #login_form > input[name="id"]
+		// 포커스는 커서가 조건을 갖추면 못움직이도록
+		
+		
+		$('#login_form > input[name="pwd"]').keyup(function(){
+			$('#login_form > #pwd_span').text('');
+		});
+		// 위랑 똑같이
+		
+		$('#login_bt').click(function(){
+			//4. 서밋 버튼을 눌렀을때를 제어할 수 있음
+			var id = $('#login_form > input[name="id"]').val();
+			var pwd = $('#login_form > input[name="pwd"]').val();
+			if(id == ''){
+				$('#login_form > #id_span').text('ID는 필수항목 입니다.');
+				return;
+			}
+			if(pwd == ''){
+				$('#login_form > #pwd_span').text('PWD는 필수항목 입니다.');
+				return;
+			}
+						
+			//5. input이 두개니 css작업에서 땡겨오는거처럼 []를 사용해줌
+			//val이라는게 가져올때나 세팅할때나 다씀
+			$('#login_form').attr({'action':'/loginimpl','method':'post'});
+			// 8. 입력받은 데이터를 서버에 저장하려고 폼에다가 액션과 메소드를 설정해야하는데 여기서도 설정이 가능
+			// 원래는 아래에서 폼 뒤에 액션, 메소드 어트리뷰트를 써야함
+			$('#login_form').submit();
+			// 9. 이제 버튼을 누르면 서버로 감
+			
+		});
+	});
+</script>
+
+<div class="center">
+
+<h1>JQ03 Center</h1>
+
+<!-- 로그인기능 구현 -->
+
+<form id="login_form">
+	ID<input type="text" name="id"><span id="id_span"></span><br>
+	PWD<input type="password" name="pwd"><span id="pwd_span"></span><br>
+	<!-- <input type="submit" value="LOGIN"> -->
+</form>
+	<button id = "login_bt">LOGIN</button>
+	<!-- 서밋 대신 버튼으로 함 -->
+</div>
+```
+```java
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MainController {
+	@RequestMapping("/")
+	public String main() {
+		return "main";
+	}
+	
+	@RequestMapping("/loginimpl")
+	public String loginimpl(String id, String pwd, Model model) {
+		if(id.equals("qqqq")&&pwd.equals("1111")) {
+			model.addAttribute("center","loginok");
+			model.addAttribute("loginid",id);
+			//11.loginid에 입력받은id를 보낼거다
+		}else {
+			model.addAttribute("center","loginfail");
+		}
+		return "main";
+	}
+	// 10.받아들이는 객체는 각각의 id값을 입력
+	// 여기에서 로그인 처리하는 로직을 넣어야함
+	// 지금은 가상의 로그인 처리를 할 예정
+}
+```
+- 메인컨트롤러도 바꿈
+- 로그인기능을 구현
+- 로그인 버튼을 누르면 메인컨트롤러의 `loginimpl`이 발동함
+- `loginimpl`에 담긴 아이디와 비번을 입력받은 값과 비교함
+- 같으면 `loginok` 다르면 `loginfail`
+
+### day04 - jq04
+```javascript
+<style>
+	#content{
+		width:500px;
+		border:2px solid red;
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		var cnt = 0;
+		// 버튼을 누르는 횟수까지 확인할 수 있도록
+		$('#append').click(function(){
+			cnt++;
+			$('#content').append('<h1>**append'+cnt+'</h1>');
+		});
+		// 3. 버튼들 기능 만들기
+		$('#prepend').click(function(){
+			cnt++;
+			$('#content').prepend('<h1>**prepend'+cnt+'</h1>');
+		});
+		$('#after').click(function(){
+			cnt++;
+			$('#content').after('<h1>**after'+cnt+'</h1>');
+		});
+		$('#before').click(function(){
+			cnt++;
+			$('#content').before('<h1>**before'+cnt+'</h1>');
+		});
+		$('#remove').click(function(){
+			$('#content').remove();
+			// 빨간칸 자체가 사라짐
+		});
+		$('#empty').click(function(){
+			$('#content').empty();
+			// 빨간칸 내부에 데이터만 사라짐
+		});
+		// 2. 각 버튼들이 클릭하면 함수 발동, $('#empty').click(function(){}); 이런식의 구조로 시작
+	});
+</script>
+
+
+<h1>JQ04 Center</h1>
+<button id="append">APPEND</button>
+<button id="prepend">PREPEND</button>
+<button id="after">AFTER</button>
+<button id="before">BEFORE</button>
+<button id="remove">REMOVE</button>
+<button id="empty">EMPTY</button>
+<!-- 1. 각 버튼들 생성 -->
+<div id = "content"></div>
+```
+- 각 버튼들의 기능을 구현함
+
+### day04 - jq05
+```javascript
+<script>
+function calc(a){
+	if(typeof(a) == 'string'){
+		if(a == '='){
+			var num = $('input[name="result"]').val();
+			var result = eval(num);
+			$('input[name="result"]').val(result);
+			return ;
+			//eval을 이용해서 문자안이 계산가능하면 계산
+		}
+		var num = $('input[name="result"]').val();
+		$('input[name="result"]').val(num+a);
+	}else if(typeof(a) == 'number'){
+		var num = $('input[name="result"]').val();
+		$('input[name="result"]').val(num+a);
+		//이렇게 하면 자리수가 늘어난다. 왜냐면 문자+숫자가 되버려서 문자가되버림
+		//스트링까지 이렇게 해주면 수식을 보여줌
+	};
+	// typeof()로 일단 숫자인지 문자인지 판별
+	// 스트링일때 이름이 result인 애한테 a값을 넣어준다
+	
+};
+</script>
+
+<h1>JQ05 Center</h1>
+<input type="text" name="result" readonly="readonly"><br>
+<!-- 원래 인풋은 폼안에 있으며 데이터를 전송시키는 역할 -->
+<!-- 우리는 계산기를 한번 만들어볼 예정 -->
+<!-- 이쁘게 만드려면 테이블로 만들어야함 -->
+<!-- readonly는 읽기만 가능하도록 입력불가 -->
+<button onclick="calc(1)">1</button>
+<button onclick="calc(2)">2</button>
+<button onclick="calc(3)">3</button>
+<button onclick="calc('+')">+</button>
+<button onclick="calc('=')">=</button>
+<!-- 계산기니까 onclick을 써서 id를 부여안시킨다 -->
+```
+- 계산기를 구현하는 예제
+- jq06에서 구현할 예정
+
+### day04 - jq06
+```javascript
+<script>
+function calc(a){
+	if(typeof(a) == 'string'){
+		if(a == '='){
+			var num = $('input[name="result"]').val();
+			var result = eval(num);
+			$('input[name="result"]').val(result);
+			return ;
+		}
+		if(a == 'c'){
+			var result = '';
+			$('input[name="result"]').val(result);
+			return ;
+		}
+		var num = $('input[name="result"]').val();
+		$('input[name="result"]').val(num+a);
+	}else if(typeof(a) == 'number'){
+		var num = $('input[name="result"]').val();
+		$('input[name="result"]').val(num+a);
+	};
+};
+
+</script>
+
+<h1>스마트폰 계산기 구현하기</h1>
+<!-- 버튼순서만 구현했는데 기능은 어떻게할까 -->
+<!-- % / * - + 등 사칙연산하는 애들은 디스플레이가 비어있을때 못들어가게 하고싶다 -->
+<!-- 중복기호 못쓰게 -->
+<!-- indexof로 '='-1 자리 값이 스트링이면 오류가나도록 만들수있지않을까 -->
+<!-- 반대로 indexof로 0번값이 스트링이면 ''이 되도록하면 되지않을까 -->
+<!-- 수식이 이어지는걸 보고싶고 = 을 눌렀을때 결과값이 나오도록 하고싶다 구현완료-->
+<!-- c를 누르면 초기화 하고싶다 구현완료-->
+<table>
+	<thead>
+		<tr><th><input type="text" name="result" readonly="readonly"></th></tr>
+	</thead>
+	<tbody>
+		<tr><td>
+		<button onclick="calc('c')">C</button>
+		<button onclick="calc('()')">()</button>
+		<button onclick="calc('%')">%</button>
+		<button onclick="calc('/')">/</button>
+		</td></tr>
+		<tr><td>
+		<button onclick="calc(7)">7</button>
+		<button onclick="calc(8)">8</button>
+		<button onclick="calc(9)">9</button>
+		<button onclick="calc('*')">X</button>
+		</td></tr>
+		<tr><td>
+		<button onclick="calc(4)">4</button>
+		<button onclick="calc(5)">5</button>
+		<button onclick="calc(6)">6</button>
+		<button onclick="calc('-')">-</button>
+		</td></tr>
+		<tr><td>
+		<button onclick="calc(1)">1</button>
+		<button onclick="calc(2)">2</button>
+		<button onclick="calc(3)">3</button>
+		<button onclick="calc('+')">+</button>
+		</td></tr>
+		<tr><td>
+		<button onclick="calc('+/-')">+/-</button>
+		<button onclick="calc(0)">0</button>
+		<button onclick="calc('.')">.</button>
+		<button onclick="calc('=')">=</button>
+		</td></tr>
+	</tbody>
+</table>
+```
+- 1~9와 사칙연산, = , c 등을 버튼으로 구현
+- 기능적인건 만족스럽게 구현하지 못함

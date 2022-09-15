@@ -1801,3 +1801,145 @@ function calc(a){
 ```
 - 1~9와 사칙연산, = , c 등을 버튼으로 구현
 - 기능적인건 만족스럽게 구현하지 못함
+
+## js+jq+ajax
+### day04를 이용한 예제
+1. 로그인 구현
+		- (login.html)
+		- 부트스트랩으로 먼저 형식을 가져옴
+		- 서밋 대신에 일반버튼으로 대체함
+		- jq로 버튼구현
+		- jq의 시작은 $(document).ready(function(){});
+		- $( )는 주어
+		- 주어는 ' '안에 들어가며 id값은 #을 붙여줌
+		- id값의 내부를 부를땐 > 로 하위값 호출
+		- jq에서는 익명클래스를 사용해서 함수안에 함수넣고
+		- 수틀리면 밖으로 빼서 또 만듬
+		- 버튼을 클릭했을때 내가 입력한 id,pwd값이 전송되도록 해야함
+		- 따라서 login_form에 속성을 부여해줘야함
+		- $('#login_form').attr({  'action':'내가실행하려는 주소'  ,  'method':'데이터를 넘기는 방법' });
+		- 그리고 나서 마지막에 $('#login_form').submit( );으로 부여된 속성값을 가진 데이터를 넘겨버림
+		- (MainController.java)
+		- loginimpl을 구현해야함
+		- 객체에 id, pwd, model, session을 줌
+		- 세션은 상황을 나누는목적
+		- 가령 로그인 하기 전엔 우상단에 로그인+회원가입
+		- 로그인 후에는 id+로그아웃 으로 변하게함
+		- 로그인 기능을 구현해야하니 현재는 임의데이터id,pwd를 직업만들고
+		- if+.equals로 이값과 입력받은 값이 같은지 비교
+		- 같으면 session.setAttribute("loginid",id);로 세션 내부에 loginid라는 값에 참값인 id를 저장
+		- model.addAttribute("center","loginok");로 센터에 loginok.html을 실행
+		- (loginok.html)
+		- 여기서는 타임리프로 문자를 호출하여 세션에 있는 id값을 불러내려함
+		- <h2 th:text=${session.loginid}+ ' 님 환영합니다.'"></h2>
+		- 만약 같지 않으면 loginfail로 전에 했던거로 바로적용
+		- (main.html)
+		- login ul에 가서 타임리프속성 붙여준다
+		- th:if="${session.loginid == null}"는 지금 로그인값이 없다면
+		- 우리가 설정했던 우상단에 로그인과 회원가입을 넣는다
+		- 또다른 ul을 만들어서 반대상황을 줘서 id+로그아웃을 만든다
+		- th:unless="${session.loginid == null}"
+		- <li><a href="#" th:text="${session.loginid}"></a></li>
+		- <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		- 아이디부분도 누를수 있게 하여서 개인정보 변경이나 뭐 눌러서 이것저것 바꿀수 있게 냅둠
+	번외. 로그아웃 구현
+		- (MainController.java)
+		- 세션이 널값이 아니면 세션을 무효화 해버리면 로그아웃이 되버린다
+		- 기본 클래스에 매핑을 걸어주고
+		- 객체에 세션을 넣어준다
+		- if로 세션이 널값이 아닐때 세션이 무효화되도록 session.invalidate( );를 넣고 리턴메인
+
+![](/image/HTML,CSS/2022-09-16-00-03-34.png)
+![](/image/HTML,CSS/2022-09-16-00-04-14.png)
+
+
+
+2. 회원가입 구현
+		- (register.html)
+		- 폼을 또하나 땡겨오고 폼 id를 register_form으로 설정
+		- id,pwd,pwd2,age,birth,hobby,gender 만듬
+		- 회원가입 버튼도 하나 만들기
+		- 버튼을 클릭했을때의 함수 구현하기
+		- 마찬가지로 $(document).ready(function( ){ }); 시작
+		- 회원가입폼 > 버튼 에 클릭함수 넣고
+		- 회원가입폼에 속성을  부여해서 속성을 부여한 값이 registerimpl로 가도록 만듬, 전송방식은 post
+		- 속성 부여후엔 서밋으로 보내버림
+		- (MainController.java)
+		- 기본 클래스에 매핑을 걸어주고
+		- 객체를 넣어줄라는데 너무 길다
+		- 따라서 CustVO라는 클래스를 따로 만들어줌
+		- CustVO는 회원가입할때 우리가 입력하는 변수들을 필드선언+기본생성자+생성자+게터세터로 만듬
+		- 만들고 난 후 다시 모델과 아까만든 CustVO속성의 객체하나까지 객체에 넣어줌
+		- 그리고 모델에 속성부여로 센터에는 registerok.html을 rid부분엔 cust에서 따온 id를 넣는다
+		- (registerok.html)
+		- 타임리프로 rid를 땡겨와서 ~님 환영합니다 를 구현
+		- 다시 (register.html)로 와서 세부조건들 설정
+		- 비번일치 이벤트 만들기
+		- pwd2에 키업함수를 걸어서 변수 pwd, pwd2가 일치하는지 안하는지 판별
+		- $('#pwd2').keyup(function(){ });로 시작
+		- var pwd = $('#pwd').val(); 로 input으로 받은 pwd에 값을줘서 변수 pwd에 담음
+		- pwd2도 마찬가지 방법사용
+		- if(pwd == pwd2)로 참이면 pwd2에 줬던 span에 Correct 입력 $('#pspan').text('Correct');
+		- 아닐 경우에 $('#pspan').text('Incorrect'); 입력
+		- 이번엔 아이디 중복을 확인하려함
+		- 이번에도 데이터를 끌어오지 못해서 임의로 정해진 데이터를 넣고 비교
+		- $('#id).keyup(fucntion( ){ })
+		- 함수 내부에 변수 설정 var id = $(this).val();
+		- 여기서 ajax를 발동시켜서 id의span에 가능 불가능 표시하려함
+		- $.ajax({ });로 발동
+		- 내부에 제이슨으로 표현
+		- { url : '/checkid', data : {'cid':id} , success : function( ){ } }
+		- (AController.java)
+		- 여기서는 클래스 매핑이 아닌 퍼블릭 오브젝트 맵핑을 하여 객체 cid의 true, false를 가리고자함
+		- 또한 이곳에 기본 클래스는 html을 요청할게 아니고 결과값만 받으려는거기 때문에 restcontroller로 받는다
+		- checkid를 맵핑하고 오브젝트 클래스를 만들어주고 스트링 cid객체를 만들어 줌
+		- 결과값에 쓰레기값 들어가지않도록 "";을 주고
+		- if로 우리가 정한 아이디들을 equals로 줌 t , f로 표현
+		- (register.html)
+		- 다시 돌아와서 success 함수 내부에 result에 대한 t, f값으로 id의 span값에 텍스트로 가능 불가능을 띄워준다
+
+![](/image/HTML,CSS/2022-09-16-00-05-02.png)
+![](/image/HTML,CSS/2022-09-16-00-05-53.png)
+![](/image/HTML,CSS/2022-09-16-00-06-36.png)
+
+3. 화면에 시간띄우기
+		- 메인 센터에 서버 시간을 띄우려함
+		- (maincenter.html)
+		- 제목외에 부제목으로 id = "server_time"이라는 것을 하나 만듬
+		- 일반적인 jq로 시작
+		- getdata함수 하나를 만듬
+		- ajax를 발동 url : '/gettime', success : function( ){ }
+		- (AController)
+		- 이것도 오브젝트 타입으로 gettime클래스 만들어주고
+		- Date d = new Date( )로 객체 생성
+		- 리턴은 d를 문자로 표현해야하니 toString으로
+		- 다시 돌아오면 함수에 result값을 넣고 디스플레이 함수를 돌려준다
+		- 디스플레이 함수를 따로 빼서 만들어줌
+		- 그냥 디스플레이에 데이터가 입력되면 result에 데이터값이 문자로 입력됨 -->근데 이게 구현이 안됨
+![](/image/HTML,CSS/2022-09-16-00-08-56.png)
+
+
+4. 실검 구현하기
+		- (ajax_center.html)
+		- 버튼을 누르면 제이슨에 저장된 것들이 나옴
+		- 버튼과 결과값이 나올 곳을 생성한다
+		- 일반적인 jq로 시작하고 추후에 인터벌을 줘서 일정 시간마다 버튼이 알아서 눌리게함
+		- 스타일로 결과값 칸이 잘 보이도록 표시
+		- getdata함수에 ajax발동 url은 getdata , 함수는 data를 받아 data를 display함수에 입력
+		- (AController.java)
+		- 오브젝트 속성의 getdata클래스 생성
+		- 제이슨은 구성이 배열과 같기때문에 제이슨 어레이 객체를 생성
+		- 제이슨 오브젝트는 K,V같은 속성이므로 맵과 비슷함. 그래서 우리가 정해놓은 데이터값들을 제이슨오브젝트에 담아야하니 얘도 객체생성
+		- jo를 put으로 하나씩 담음. 모든 데이터가 담을때까지
+		- 그리고 이 jo들을 ja배열에 담음
+		- (ajax_center.html)
+		- 다시 돌아오면 data = ja 이므로 이걸 디스플레이 해주면된다
+		- 초기 결과값에 빈칸을 주고
+		- 배열이므로 for문을 돌려야함
+		- 근데 jq에서 for문은 다름
+		- $(data).each(function(index,item){ });
+		- 주어 배열의 각각의 키와 벨류를 함수 돌린다
+		- result 세개를 주는데 이 중 두개는 다음줄로 넘기기 위한것
+		- 가운데 result에 벨류값 세개를 +로 입력
+		- 마지막엔 주어 결과창에 html로 result를 띄워준다
+![](/image/HTML,CSS/2022-09-16-00-09-38.png)

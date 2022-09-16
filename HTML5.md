@@ -1946,7 +1946,8 @@ function calc(a){
 
 ### day04 자료들
 > 계속 덮어씌우며 사용하도록
-1. 컨트롤러
+#### 1. 컨트롤러
+##### AController
 ```java
 import java.util.Date;
 import java.util.Random;
@@ -1967,6 +1968,146 @@ public class AController {
 	public Object gettime() {
 		Date d = new Date();
 		return "Server Time : "+d.toString();
+	}
+	
+	@RequestMapping("/getmarker")
+	public Object getmarker() {
+		JSONArray ja = new JSONArray();
+		JSONObject jo1 = new JSONObject();
+		jo1.put("title", "국밥집");
+		jo1.put("target", "http://www.naver.com");
+		jo1.put("lat", 33.2625165);
+		jo1.put("lng", 126.5553960);
+		ja.add(jo1);
+		
+		JSONObject jo2 = new JSONObject();
+		jo1.put("title", "중식집");
+		jo1.put("target", "http://www.daum.net");
+		jo1.put("lat", 33.2621120);
+		jo1.put("lng", 126.5683600);
+		ja.add(jo2);
+		
+		JSONObject jo3 = new JSONObject();
+		jo1.put("title", "양식집");
+		jo1.put("target", "http://www.google.com");
+		jo1.put("lat", 33.2632010);
+		jo1.put("lng", 126.5513750);
+		ja.add(jo3);
+		
+		return ja;
+	}
+	
+	@RequestMapping("/ch3")
+	public Object ch3(String area) {
+		//System.out.println(area); 확인용
+		//{title:'Seoul',data:[[],[]]}
+		JSONObject jo = new JSONObject();
+		if(area.equals("s")) {
+			jo.put("title", "Seoul");
+			JSONArray ja = new JSONArray();
+			for(var i=1; i<=5; i++) {
+				JSONArray jaa = new JSONArray();
+				jaa.add((i*10)+"대");
+				jaa.add(20);
+				ja.add(jaa);
+			}
+			
+			jo.put("data", ja);
+		}else if(area.equals("b")) {
+			jo.put("title", "Busan");
+			JSONArray ja = new JSONArray();
+			for(var i=1; i<=5; i++) {
+				JSONArray jaa = new JSONArray();
+				jaa.add((i*10)+"대");
+				jaa.add(20);
+				ja.add(jaa);
+			}
+			
+			jo.put("data", ja);
+		}else if(area.equals("j")) {
+			jo.put("title", "Jeju");
+			JSONArray ja = new JSONArray();
+			for(var i=1; i<=5; i++) {
+				JSONArray jaa = new JSONArray();
+				jaa.add((i*10)+"대");
+				jaa.add(20);
+				ja.add(jaa);
+			}
+			
+			jo.put("data", ja);
+		}
+		return jo;
+	}
+	
+	@RequestMapping("/getdata1")
+	public Object getdata1() {
+		// [{name:'',data:[]},{}]
+		Random r = new Random();
+		String str = "Seoul";
+		
+		JSONArray ja = new JSONArray();
+		for(var i=1; i<=5; i++) {
+			
+			JSONObject jo = new JSONObject();
+			jo.put("name", str+i);
+			JSONArray jaa = new JSONArray();
+			for(var j=1; j<=12; j++) {
+				jaa.add(r.nextInt(10000)+1);
+			}
+			jo.put("data", jaa);
+			ja.add(jo);
+		}
+		return ja;
+	}
+	
+	@RequestMapping("/getdata2")
+	public Object getdata2() {
+		// [[],[],[]]
+		Random r = new Random();
+		JSONArray ja = new JSONArray();
+		
+		String str = "Korea";
+		
+		for(var i=1; i<=20; i++) {
+			JSONArray jaa = new JSONArray();
+			jaa.add(str+i);
+			jaa.add(r.nextInt(100)+1);
+			ja.add(jaa);
+		}
+		
+		return ja;
+	}
+	
+	@RequestMapping("/ch1")
+	//13. /ch1만들기
+	//14. 카테고리까지 하고싶다
+	public Object ch1() {
+		Random r = new Random();
+		JSONArray ja_data = new JSONArray();
+		//제이슨 어레이만 필요
+		for(var i=1; i<=10; i++) {
+			//12개 데이터니까 12번돌린다
+			ja_data.add(r.nextInt(30000)+1);
+		}
+		JSONArray ja_cate = new JSONArray();
+		ja_cate.add("한국");
+		ja_cate.add("일본");
+		ja_cate.add("중국");
+		ja_cate.add("미국");
+		ja_cate.add("싱가폴");
+		ja_cate.add("미얀마");
+		ja_cate.add("베트남");
+		ja_cate.add("호주");
+		ja_cate.add("태국");
+		ja_cate.add("캄보디아");
+		
+		// 카테고리 데이터 제이슨 어레이
+		
+		JSONObject jo = new JSONObject();
+		jo.put("cate", ja_cate);
+		jo.put("data", ja_data);
+		// 제이슨 오브젝트로 두개의 제이슨 어레이를 하나로
+		return jo;
 	}
 	
 	@RequestMapping("/getdata")
@@ -2032,6 +2173,7 @@ public class AController {
 
 }
 ```
+##### AJAXController
 ```java
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -2099,6 +2241,7 @@ public class AJAXController {
 
 }
 ```
+##### ChartController
 ```java
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -2138,6 +2281,7 @@ public class ChartController {
 
 }
 ```
+##### GeoController
 ```java
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -2177,6 +2321,7 @@ public class GeoController {
 
 }
 ```
+##### MainController
 ```java
 import javax.servlet.http.HttpSession;
 
@@ -2246,6 +2391,7 @@ public class MainController {
 	
 }
 ```
+##### JSController
 ```java
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -2354,6 +2500,7 @@ public class JSController {
 	}
 }
 ```
+##### JQController
 ```java
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -2421,7 +2568,7 @@ public class JQController {
 	
 }
 ```
-2. VO
+#### 2. VO
 ```java
 public class CustVO {
 	private String id;
@@ -2482,7 +2629,7 @@ public class CustVO {
 	
 }
 ```
-3. 템플릿 - ajax
+#### 3. 템플릿 - ajax
 ```html
 <style>
 #result{
@@ -2547,20 +2694,365 @@ $(document).ready(function(){
 <h1>AJAX01 Center</h1>
 ```
 
-4. 템플릿 - 차트
+#### 4. 템플릿 - 차트
+##### chart_center.html
 ```html
 <h1>Chart Center</h1>
 ```
+##### chart_left.html
 ```html
 <p><a href="/chart/chart01">chart01</a></p>
 <p><a href="/chart/chart02">chart02</a></p>
 <p><a href="/chart/chart03">chart03</a></p>
 ```
+##### chart01.html
 ```html
+<style>
+#container{
+	width:500px;
+	height:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display(data){
+	//4. display함수 만들기
+	//5. main.html에 차트 라이브러리 삽입하기
+	//6. 차트 붙여넣기
+	//10. 객체에 data 넣기
+	Highcharts.chart('container', {
+	    chart: {
+	        type: 'column',
+	        options3d: {
+	            enabled: true,
+	            alpha: 10,
+	            beta: 25,
+	            depth: 70
+	        }
+	    },
+	    title: {
+	        text: 'MyChart'
+	    },
+	    subtitle: {
+	        text: 'Source: ' +
+	            '<a href="https://www.ssb.no/en/statbank/table/08804/"' +
+	            'target="_blank">Multi</a>'
+	    },
+	    plotOptions: {
+	        column: {
+	            depth: 25
+	        }
+	    },
+	    xAxis: {
+	        categories: data['cate'],//15. data라는 제이슨오브젝트에서 'cate'를 끄집어냄
+	        labels: {
+	            skew3d: true,
+	            style: {
+	                fontSize: '16px'
+	            }
+	        }
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'NOK (million)',
+	            margin: 20
+	        }
+	    },
+	    tooltip: {
+	        valueSuffix: ' MNOK'
+	    },
+	    series: [{
+	        name: 'Total imports',
+	        data : data['data']
+	    }]
+	});
+};
+
+function getdata(){
+	//var data = [16076, 112688, 39452, 0, 94352,
+        //30495, 21813, 95908, 11596, 53771, null, 8270];
+      	//11. 이부분을 ajax로 구현하기
+      	$.ajax({
+      		url:'/ch1',
+      		success:function(data){
+      			display(data);
+      		}//12. /ch1 만들기
+      	})
+      	//display(data);
+      	//9. getdata로 임의 데이터를 담고 display로 보냄 
+};
+
+$(document).ready(function(){
+	//2. jq기본세팅
+	//display();
+	//3. display함수로 출력
+	
+	$('#ch1').click(function(){
+		//7. ch1버튼 클릭시 함수발동
+		 getdata();
+		//8. getdata 함수로
+	});
+});
+</script>
+
 <h1>chart01 Center</h1>
+<button id = "ch1">Chart1</button>
+<div id = "container"></div>
+<!-- 1.버튼, div id설정 -->
+<!-- 버튼을 누르면 div영역에 차트가 그려짐 -->
+```
+##### chart02.html
+```html
+<style>
+.col-sm-6{
+	width:400px;
+	height:400px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display1(result){
+	//5. 차트 삽입
+	//7. display1에 result값 들어감
+	Highcharts.chart('container1', {
+
+	    title: {
+	        text: 'U.S Solar Employment Growth by Job Category, 2010-2020'
+	    },
+
+	    subtitle: {
+	        text: 'Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>'
+	    },
+
+	    yAxis: {
+	        title: {
+	            text: 'Number of Employees'
+	        }
+	    },
+
+	    xAxis: {
+	        accessibility: {
+	            rangeDescription: 'Range: 2010 to 2020'
+	        }
+	    },
+
+	    legend: {
+	        layout: 'vertical',
+	        align: 'right',
+	        verticalAlign: 'middle'
+	    },
+
+	    plotOptions: {
+	        series: {
+	            label: {
+	                connectorAllowed: false
+	            },
+	            pointStart: 2010
+	        }
+	    },
+
+	    series: result,
+
+	    responsive: {
+	        rules: [{
+	            condition: {
+	                maxWidth: 500
+	            },
+	            chartOptions: {
+	                legend: {
+	                    layout: 'horizontal',
+	                    align: 'center',
+	                    verticalAlign: 'bottom'
+	                }
+	            }
+	        }]
+	    }
+
+	});
+};
+function display2(result){
+	Highcharts.chart('container2', {
+	    chart: {
+	        type: 'column'
+	    },
+	    title: {
+	        text: 'World\'s largest cities per 2021'
+	    },
+	    subtitle: {
+	        text: 'Source: <a href="https://worldpopulationreview.com/world-cities" target="_blank">World Population Review</a>'
+	    },
+	    xAxis: {
+	        type: 'category',
+	        labels: {
+	            rotation: -45,
+	            style: {
+	                fontSize: '13px',
+	                fontFamily: 'Verdana, sans-serif'
+	            }
+	        }
+	    },
+	    yAxis: {
+	        min: 0,
+	        title: {
+	            text: 'Population (millions)'
+	        }
+	    },
+	    legend: {
+	        enabled: false
+	    },
+	    tooltip: {
+	        pointFormat: 'Population in 2021: <b>{point.y:.1f} millions</b>'
+	    },
+	    series: [{// 배열안의 배열
+	        name: 'Population',
+	        data: result,//9. 데이터 넣기
+	        dataLabels: {
+	            enabled: true,
+	            rotation: -90,
+	            color: '#FFFFFF',
+	            align: 'right',
+	            format: '{point.y:.1f}', // one decimal
+	            y: 10, // 10 pixels down from the top
+	            style: {
+	                fontSize: '13px',
+	                fontFamily: 'Verdana, sans-serif'
+	            }
+	        }
+	    }]
+	});
+};
+
+function getdata1(){
+	//6. ajax 기본세팅
+	$.ajax({
+		url:'/getdata1',
+		success:function(result){
+			display1(result);
+		}
+	})
+};
+function getdata2(){
+	$.ajax({
+		url:'/getdata2',
+		success:function(result){
+			display2(result);
+			//8. /getdata1, /getdata2 만들기
+		}
+	})
+};
+//4. getdata - display연결
+
+$(document).ready(function(){
+	//2. jq기본세팅
+	getdata1();
+	getdata2();
+	//3. 각 차트에 들어갈 데이터를 가져온다
+});
+</script>
+<h1>chart02 Center</h1>
+<!-- 두개의 차트 동시에 그리기 -->
+
+<div class="row">
+  <div class="col-sm-6" id = "container1">.col-sm-6</div>
+  <div class="col-sm-6" id = "container2">.col-sm-6</div>
+</div>
+<!-- 1. 화면 분할하기 -->
+```
+##### chart03
+```html
+<style>
+#container{
+	width:100%;
+	height:300px;
+	border:2px solid red;
+}
+</style>
+<script>
+function display(result){
+	Highcharts.chart('container', {
+	    chart: {
+	        plotBackgroundColor: null,
+	        plotBorderWidth: 0,
+	        plotShadow: false
+	    },
+	    title: {
+	        text: result['title'],
+	        align: 'center',
+	        verticalAlign: 'middle',
+	        y: 60
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    accessibility: {
+	        point: {
+	            valueSuffix: '%'
+	        }
+	    },
+	    plotOptions: {
+	        pie: {
+	            dataLabels: {
+	                enabled: true,
+	                distance: -50,
+	                style: {
+	                    fontWeight: 'bold',
+	                    color: 'white'
+	                }
+	            },
+	            startAngle: -90,
+	            endAngle: 90,
+	            center: ['50%', '75%'],
+	            size: '110%'
+	        }
+	    },
+	    series: [{
+	        type: 'pie',
+	        name: 'Browser share',
+	        innerSize: '50%',
+	        data: result['data']
+	    }]
+	});
+
+};
+
+function getdata(value){
+	$.ajax({
+		url:'/ch3',
+		data:{'area':value},
+		success:function(result){
+			//alert(result['title']);
+			//alert(result['data']);
+			display(result);
+		}
+	});
+};
+
+$(document).ready(function(){
+	$('#sel1').change(function(){
+		var value = $(this).val();
+		//내 자신이 바뀌면 내 자신에서 변수를 가져와라
+		//alert(value); //데이터 넘어가는거 확인됨
+		getdata(value);
+	});
+});
+</script>
+
+<h1>chart03 Center</h1>
+<!-- login과 register는 폼과 폼사이에 서버데이터 전송, ajax를 안씀 -->
+<!-- 폼을 이용하지않고 데이터 전송, ajax사용-->
+<div class="form-group">
+  <label for="sel1">Select Area:</label>
+  <select class="form-control" id="sel1">
+    <option>Choice Area</option>
+    <option value="s">Seoul</option>
+    <option value="b">Busan</option>
+    <option value="j">Jeju</option>
+  </select>
+</div>
+<div id="container"></div>
 ```
 
-5. 템플릿 - 지도
+#### 5. 템플릿 - 지도
 ```html
 <h1>Geo Center</h1>
 ```
@@ -2573,7 +3065,7 @@ $(document).ready(function(){
 <h1>geo01 Center</h1>
 ```
 
-6. 템플릿 - JQuery
+#### 6. 템플릿 - JQuery
 ```html
 <h1>JQuery Center</h1>
 ```
@@ -2997,7 +3489,7 @@ function calc(a){
 </div>
 ```
 
-7. 템플릿 - JavaScript
+#### 7. 템플릿 - JavaScript
 ```html
 <h1>JavaScript Center</h1>
 ```
@@ -3355,7 +3847,7 @@ window.onload = function(){
 <h3><a id = "daum" href="#">Daum</a></h3>
 ```
 
-8. 템플릿 - 메인
+#### 8. 템플릿 - 메인
 ```html
 <script >
 $(document).ready(function(){
@@ -3403,6 +3895,7 @@ $(document).ready(function(){
 <!-- th 는 타임리프호출 명령어 -->
 <!-- 세션안에 있는 loginid를 끄집어내라 -->
 ```
+##### main.html
 ```html
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
@@ -3415,6 +3908,14 @@ $(document).ready(function(){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ <!-- 차트 라이브러리 -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+ <!-- 카카오맵 -->
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5391a7213215108e6b8dc6ea778851ac"></script>
  
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 

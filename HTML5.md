@@ -1805,7 +1805,7 @@ function calc(a){
 ## js+jq+ajax
 ### day04를 이용한 예제
 1. 로그인 구현
-		- (login.html)
+	- (login.html)
 		- 부트스트랩으로 먼저 형식을 가져옴
 		- 서밋 대신에 일반버튼으로 대체함
 		- jq로 버튼구현
@@ -1839,8 +1839,8 @@ function calc(a){
 		- 우리가 설정했던 우상단에 로그인과 회원가입을 넣는다
 		- 또다른 ul을 만들어서 반대상황을 줘서 id+로그아웃을 만든다
 		- th:unless="${session.loginid == null}"
-		- <li><a href="#" th:text="${session.loginid}"></a></li>
-		- <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		- `<li><a href="#" th:text="${session.loginid}"></a></li>`
+		- `<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>`
 		- 아이디부분도 누를수 있게 하여서 개인정보 변경이나 뭐 눌러서 이것저것 바꿀수 있게 냅둠
 	번외. 로그아웃 구현
 		- (MainController.java)
@@ -1855,7 +1855,7 @@ function calc(a){
 
 
 2. 회원가입 구현
-		- (register.html)
+	- (register.html)
 		- 폼을 또하나 땡겨오고 폼 id를 register_form으로 설정
 		- id,pwd,pwd2,age,birth,hobby,gender 만듬
 		- 회원가입 버튼도 하나 만들기
@@ -1903,7 +1903,7 @@ function calc(a){
 ![](/image/HTML,CSS/2022-09-16-00-06-36.png)
 
 3. 화면에 시간띄우기
-		- 메인 센터에 서버 시간을 띄우려함
+	- 메인 센터에 서버 시간을 띄우려함
 		- (maincenter.html)
 		- 제목외에 부제목으로 id = "server_time"이라는 것을 하나 만듬
 		- 일반적인 jq로 시작
@@ -1920,7 +1920,7 @@ function calc(a){
 
 
 4. 실검 구현하기
-		- (ajax_center.html)
+	- (ajax_center.html)
 		- 버튼을 누르면 제이슨에 저장된 것들이 나옴
 		- 버튼과 결과값이 나올 곳을 생성한다
 		- 일반적인 jq로 시작하고 추후에 인터벌을 줘서 일정 시간마다 버튼이 알아서 눌리게함

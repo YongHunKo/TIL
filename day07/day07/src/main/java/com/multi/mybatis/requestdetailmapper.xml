@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.RequestDetailMapper">
+	
+	<select id="select" parameterType="String" resultType="RequestDetailDTO">
+		SELECT * FROM requestDetail WHERE rdno=#{rdno}
+	</select>
+	<select id="selectall" resultType="RequestDetailDTO">
+		SELECT * FROM requestDetail
+	</select>
+	<insert id="insert" parameterType="RequestDetailDTO">
+		INSERT INTO requestDetail VALUES (#{rdno}, #{rqid}, #{itemid}, #{total}, #{coupon}, #{rdcnt})
+	</insert>
+	<update id="update" parameterType="RequestDetailDTO">
+		UPDATE requestDetail SET rqid=#{rqid}, itemid=#{itemid}, total=#{total}, coupon=#{coupon}, rdcnt=#{rdcnt} WHERE rdno=#{rdno}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM requestDetail WHERE rdno=#{rdno}
+	</delete>
+	
+</mapper>

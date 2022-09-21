@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.ItemMapper">
+	
+	<select id="select" parameterType="Integer" resultType="ItemDTO">
+		SELECT * FROM item WHERE itemid=#{itemid}
+	</select>
+	<select id="selectall" resultType="ItemDTO">
+		SELECT * FROM item
+	</select>
+	<insert id="insert" parameterType="ItemDTO">
+		INSERT INTO item VALUES (#{itemid},#{cateid},#{sellid},#{name},#{price},#{img},#{rdate})
+	</insert>
+	<update id="update" parameterType="ItemDTO">
+		UPDATE item SET cateid=#{cateid}, sellid=#{sellid}, name=#{name}, price=#{price}, img=#{img}, rdate=#{rdate} WHERE itemid=#{itemid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM item WHERE itemid=#{itemid}
+	</delete>
+	
+</mapper>
